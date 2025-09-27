@@ -118,9 +118,9 @@ const SuperResumes = () => {
 
         {/* CTA */}
         <div className="text-center">
-          <button className="btn-hero">
+          <button className="btn-hero inline-flex items-center gap-2">
             Explore Super Resumes
-            <ArrowRight className="w-5 h-5 ml-2" />
+            <ArrowRight className="w-5 h-5" />
           </button>
         </div>
       </div>

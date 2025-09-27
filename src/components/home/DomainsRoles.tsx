@@ -122,11 +122,10 @@ const DomainsRoles = () => {
           })}
         </div>
 
-        {/* Show More */}
         <div className="text-center mt-12">
-          <button className="btn-secondary">
+          <button className="btn-secondary inline-flex items-center gap-2">
             View All Domains & Roles
-            <ChevronRight className="w-4 h-4 ml-2" />
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
