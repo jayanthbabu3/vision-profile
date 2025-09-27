@@ -33,7 +33,7 @@ const HowItWorks = () => {
           <h2 className="font-heading font-bold text-3xl lg:text-4xl mb-4">
             How It Works
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-sm text-slate-500 max-w-2xl mx-auto">
             Create your perfect resume in minutes with our AI-powered platform
           </p>
         </div>

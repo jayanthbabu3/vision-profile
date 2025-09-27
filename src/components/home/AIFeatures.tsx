@@ -44,7 +44,7 @@ const AIFeatures = () => {
           <h2 className="font-heading font-bold text-3xl lg:text-4xl mb-4">
             Your AI Resume Assistant
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className="text-sm text-slate-500 max-w-3xl mx-auto">
             Let artificial intelligence help you create the perfect resume with smart suggestions, 
             content generation, and optimization tools.
           </p>

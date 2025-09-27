@@ -51,7 +51,7 @@ const DomainsRoles = () => {
           <h2 className="font-heading font-bold text-3xl lg:text-4xl mb-4 text-slate-900">
             Choose Your Domain
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">
+          <p className="text-sm text-slate-500 max-w-2xl mx-auto">
             Get role-specific templates and AI suggestions tailored to your industry
           </p>
         </div>

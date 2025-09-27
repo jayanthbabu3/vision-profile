@@ -38,7 +38,7 @@ const SuperResumes = () => {
           <h2 className="font-heading font-bold text-3xl lg:text-4xl mb-4">
             Learn from the Best
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className="text-sm text-slate-500 max-w-3xl mx-auto">
             Study how top professionals at leading companies structure their resumes. 
             Get inspired by real examples from successful candidates.
           </p>
