@@ -2,39 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Premium Resume Builder Design System */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Page & Surface Colors */
+    --background: 218 23% 97%; /* Slate 50 #F8FAFC */
+    --surface: 0 0% 100%; /* White surfaces */
+    --foreground: 222 84% 5%; /* Slate 900 #0F172A */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Brand Colors */
+    --primary: 238 72% 59%; /* Indigo 600 #4F46E5 */
+    --primary-hover: 239 68% 54%; /* Indigo 700 #4338CA */
+    --primary-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --accent: 43 96% 56%; /* Amber 500 #F59E0B */
+    --accent-foreground: 222 84% 5%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Semantic Colors */
+    --success: 160 84% 39%; /* Emerald 500 #10B981 */
+    --success-foreground: 0 0% 100%;
+    
+    --danger: 349 89% 60%; /* Rose 500 #F43F5E */
+    --danger-foreground: 0 0% 100%;
+    
+    --info: 199 89% 48%; /* Sky 500 #0EA5E9 */
+    --info-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Neutral Scale */
+    --slate-50: 218 23% 97%;
+    --slate-100: 220 14% 96%;
+    --slate-200: 220 13% 91%;
+    --slate-300: 216 12% 84%;
+    --slate-400: 218 11% 65%;
+    --slate-500: 220 9% 46%;
+    --slate-600: 215 14% 34%;
+    --slate-700: 215 19% 25%;
+    --slate-800: 217 19% 18%;
+    --slate-900: 222 84% 5%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Component Tokens */
+    --card: var(--surface);
+    --card-foreground: var(--foreground);
+    
+    --muted: var(--slate-100);
+    --muted-foreground: var(--slate-600);
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --border: var(--slate-200);
+    --input: var(--slate-200);
+    --ring: var(--primary);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--slate-100)));
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Shadows */
+    --shadow-soft: 0 2px 12px hsl(var(--slate-900) / 0.06);
+    --shadow-premium: 0 8px 32px hsl(var(--slate-900) / 0.12);
+
+    /* Animations */
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     --radius: 0.5rem;
 
@@ -100,6 +129,65 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-3xl lg:text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl lg:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl lg:text-2xl;
+  }
+}
+
+@layer components {
+  /* Premium Button Variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-primary-hover text-primary-foreground px-8 py-4 rounded-2xl font-medium shadow-premium hover:shadow-lg transition-all duration-200 hover:scale-[1.02];
+  }
+
+  .btn-secondary {
+    @apply bg-surface text-foreground border-2 border-border px-8 py-4 rounded-2xl font-medium hover:border-primary/30 hover:bg-slate-50 transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply text-slate-600 hover:text-primary hover:bg-slate-50 px-6 py-3 rounded-xl font-medium transition-all duration-200;
+  }
+
+  /* Premium Cards */
+  .card-premium {
+    @apply bg-surface border border-border rounded-2xl p-6 shadow-soft hover:shadow-premium transition-all duration-300;
+  }
+
+  .card-template {
+    @apply bg-surface border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-premium transition-all duration-300 cursor-pointer;
+  }
+
+  /* Premium Badge */
+  .badge-premium {
+    @apply inline-flex items-center gap-1 bg-accent text-accent-foreground px-3 py-1 rounded-lg text-sm font-medium;
+  }
+
+  /* Hover Animations */
+  .hover-lift {
+    @apply transition-all duration-200 hover:scale-[1.02] hover:shadow-premium;
+  }
+
+  .hover-fade {
+    @apply transition-opacity duration-200 hover:opacity-80;
+  }
+
+  /* Gradient Text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-primary-hover bg-clip-text text-transparent;
   }
 }

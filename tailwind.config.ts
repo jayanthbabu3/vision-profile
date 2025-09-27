@@ -13,35 +13,54 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        heading: ['Plus Jakarta Sans', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        surface: "hsl(var(--surface))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
+          hover: "hsl(var(--primary-hover))",
           foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        danger: {
+          DEFAULT: "hsl(var(--danger))",
+          foreground: "hsl(var(--danger-foreground))",
+        },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
+        },
+        slate: {
+          50: "hsl(var(--slate-50))",
+          100: "hsl(var(--slate-100))",
+          200: "hsl(var(--slate-200))",
+          300: "hsl(var(--slate-300))",
+          400: "hsl(var(--slate-400))",
+          500: "hsl(var(--slate-500))",
+          600: "hsl(var(--slate-600))",
+          700: "hsl(var(--slate-700))",
+          800: "hsl(var(--slate-800))",
+          900: "hsl(var(--slate-900))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -57,6 +76,21 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      maxWidth: {
+        container: '1200px',
+      },
+      boxShadow: {
+        soft: 'var(--shadow-soft)',
+        premium: 'var(--shadow-premium)',
+      },
+      backgroundImage: {
+        'gradient-hero': 'var(--gradient-hero)',
+        'gradient-subtle': 'var(--gradient-subtle)',
+      },
+      transitionTimingFunction: {
+        smooth: 'var(--transition-smooth)',
+        spring: 'var(--transition-spring)',
       },
       borderRadius: {
         lg: "var(--radius)",
