@@ -8,6 +8,22 @@ const HeroSection = () => {
       {/* Advanced Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-50"></div>
       
+      {/* SVG-style Background Shapes */}
+      <div className="absolute top-20 right-10 w-32 h-32 opacity-30">
+        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent rounded-full"></div>
+        <div className="absolute top-4 left-4 w-24 h-24 border-2 border-primary/20 rounded-full"></div>
+        <div className="absolute top-8 left-8 w-16 h-16 bg-accent/10 rounded-full"></div>
+      </div>
+      
+      <div className="absolute bottom-40 left-10 w-40 h-40 opacity-20">
+        <div className="w-full h-full border-2 border-accent/30 rounded-full"></div>
+        <div className="absolute top-6 left-6 w-28 h-28 bg-gradient-to-br from-accent/10 to-transparent rounded-full"></div>
+      </div>
+      
+      <div className="absolute top-32 left-1/4 w-6 h-6 bg-primary/20 rounded-full opacity-40"></div>
+      <div className="absolute bottom-60 right-1/4 w-4 h-4 bg-accent/30 rounded-full opacity-50"></div>
+      <div className="absolute top-60 right-1/3 w-8 h-8 border border-primary/20 rounded-full opacity-30"></div>
+      
       {/* Floating geometric shapes */}
       <div className="absolute top-24 right-16 w-64 h-64 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-32 left-16 w-80 h-80 bg-gradient-to-br from-accent/8 to-accent/3 rounded-full blur-3xl"></div>
@@ -28,7 +44,7 @@ const HeroSection = () => {
             
             {/* Main Headline */}
             <div className="space-y-4">
-              <h1 className="font-heading font-bold text-4xl lg:text-5xl xl:text-6xl leading-[1.1] tracking-tight">
+              <h1 className="font-heading font-bold text-3xl lg:text-4xl xl:text-5xl leading-[1.1] tracking-tight">
                 Build a{" "}
                 <span className="relative">
                   <span className="text-gradient">premium</span>
@@ -46,13 +62,13 @@ const HeroSection = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="group inline-flex items-center justify-center bg-gradient-to-r from-primary to-primary-hover text-primary-foreground px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
+              <button className="group inline-flex items-center justify-center bg-gradient-to-r from-primary to-primary-hover text-primary-foreground px-6 py-3 rounded-xl font-medium text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
                 Start Building Free
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </button>
               
-              <button className="group inline-flex items-center justify-center bg-white/80 backdrop-blur-sm text-slate-700 border-2 border-slate-200 px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white hover:border-primary/30 hover:text-primary transition-all duration-300">
-                <Play className="w-5 h-5 mr-2" />
+              <button className="group inline-flex items-center justify-center bg-white/80 backdrop-blur-sm text-slate-700 border border-slate-200 px-6 py-3 rounded-xl font-medium text-base hover:bg-white hover:border-primary/30 hover:text-primary transition-all duration-300">
+                <Play className="w-4 h-4 mr-2" />
                 View Templates
               </button>
             </div>
@@ -125,10 +141,10 @@ const HeroSection = () => {
 
                 {/* Analytics card like in reference */}
                 <div className="absolute top-16 -left-12 bg-white rounded-2xl p-4 shadow-xl border border-slate-100 hidden lg:block">
-                  <div className="text-xs text-slate-500 mb-1">Success Rate</div>
-                  <div className="text-2xl font-bold text-slate-900 mb-2">94%</div>
+                  <div className="text-xs text-slate-500 mb-1">Active Users</div>
+                  <div className="text-2xl font-bold text-slate-900 mb-2">2.4k+</div>
                   <div className="w-16 h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="w-[94%] h-full bg-gradient-to-r from-primary to-primary-hover rounded-full"></div>
+                    <div className="w-[85%] h-full bg-gradient-to-r from-primary to-primary-hover rounded-full"></div>
                   </div>
                 </div>
               </div>
