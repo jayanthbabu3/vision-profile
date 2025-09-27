@@ -102,7 +102,7 @@ const AIFeatures = () => {
               <div className="bg-primary/5 p-6 rounded-xl border border-primary/20">
                 <div className="text-xs font-medium text-primary mb-3">AFTER (AI Enhancement)</div>
                 <div className="text-sm text-slate-700">
-                  "Led development of 3 high-impact React applications serving 50K+ users, utilizing Node.js microservices architecture. Collaborated with cross-functional teams to deliver projects 20% ahead of schedule, improving team velocity and client satisfaction."
+                  "Developed multiple software projects at a leading tech company, leveraging React.js for frontend development and Node.js for backend services. Consistently delivered high-quality solutions that enabled the team to meet critical project deadlines ahead of schedule."
                 </div>
               </div>
             </div>
