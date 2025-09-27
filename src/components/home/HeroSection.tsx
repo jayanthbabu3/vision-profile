@@ -58,7 +58,7 @@ const HeroSection = () => {
                 <br className="hidden sm:block" />
                 <span className="text-gradient">ATS-friendly</span> resume
               </h1>
-              <p className="text-sm text-slate-500">
+              <p className="text-base text-slate-500">
                 Pick your role, choose a template, let AI tailor your resume to any job description. Get hired faster with professional, ATS-optimized resumes.
               </p>
             </div>

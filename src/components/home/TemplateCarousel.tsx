@@ -92,7 +92,7 @@ const TemplateCarousel = () => {
           <h2 className="font-heading font-bold text-4xl lg:text-5xl mb-6 text-gradient animate-fade-in">
             Premium Templates
           </h2>
-          <p className="text-sm text-slate-500 max-w-3xl mx-auto animate-fade-in">
+          <p className="text-base text-slate-500 max-w-3xl mx-auto animate-fade-in">
             Professional, ATS-optimized designs crafted for every role and industry
           </p>
 
