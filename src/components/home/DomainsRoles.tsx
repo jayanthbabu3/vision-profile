@@ -1,5 +1,6 @@
-import { Code, Stethoscope, GraduationCap, Briefcase, ChevronRight } from "lucide-react";
+import { Code, Stethoscope, GraduationCap, Briefcase, ChevronRight, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const domains = [
   {
@@ -123,10 +124,10 @@ const DomainsRoles = () => {
         </div>
 
         <div className="text-center mt-12">
-          <button className="btn-secondary inline-flex items-center gap-2">
-            View All Domains & Roles
-            <ChevronRight className="w-4 h-4" />
-          </button>
+          <Button size="lg" variant="outline" className="inline-flex items-center gap-2">
+            <span>View All Domains & Roles</span>
+            <ArrowRight className="w-4 h-4" />
+          </Button>
         </div>
       </div>
     </section>

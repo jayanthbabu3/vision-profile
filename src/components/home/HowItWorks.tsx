@@ -1,4 +1,5 @@
 import { FileText, Sparkles, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const steps = [
   {
@@ -76,9 +77,9 @@ const HowItWorks = () => {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <button className="btn-hero">
+          <Button size="lg" className="bg-gradient-to-r from-primary to-primary-hover text-primary-foreground hover:scale-[1.02] transition-all duration-200">
             Get Started Now
-          </button>
+          </Button>
         </div>
       </div>
     </section>

@@ -118,10 +118,10 @@ const SuperResumes = () => {
 
         {/* CTA */}
         <div className="text-center">
-          <button className="btn-hero inline-flex items-center gap-2">
-            Explore Super Resumes
-            <ArrowRight className="w-5 h-5" />
-          </button>
+          <Button size="lg" className="bg-gradient-to-r from-primary to-primary-hover text-primary-foreground hover:scale-[1.02] transition-all duration-200 inline-flex items-center gap-2">
+            <span>Explore Super Resumes</span>
+            <ArrowRight className="w-4 h-4" />
+          </Button>
         </div>
       </div>
     </section>

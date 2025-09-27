@@ -1,4 +1,5 @@
 import { Sparkles, Target, Upload, BarChart3 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const features = [
   {
@@ -108,9 +109,9 @@ const AIFeatures = () => {
             </div>
 
             <div className="mt-8">
-              <button className="btn-hero">
+              <Button size="lg" className="bg-gradient-to-r from-primary to-primary-hover text-primary-foreground hover:scale-[1.02] transition-all duration-200">
                 Try AI Enhancement
-              </button>
+              </Button>
             </div>
           </div>
         </div>

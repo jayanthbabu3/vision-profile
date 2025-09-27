@@ -65,15 +65,15 @@ const HeroSection = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="group inline-flex items-center justify-center bg-gradient-to-r from-primary to-primary-hover text-primary-foreground px-6 py-3 rounded-xl font-medium text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
+              <Button size="lg" className="bg-gradient-to-r from-primary to-primary-hover text-primary-foreground hover:scale-[1.02] transition-all duration-200 group">
                 Start Building Free
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Button>
               
-              <button className="group inline-flex items-center justify-center bg-white/80 backdrop-blur-sm text-slate-700 border border-slate-200 px-6 py-3 rounded-xl font-medium text-base hover:bg-white hover:border-primary/30 hover:text-primary transition-all duration-300">
+              <Button size="lg" variant="outline" className="bg-white/80 backdrop-blur-sm hover:bg-white hover:border-primary/30 hover:text-primary transition-all duration-300 group">
                 <Play className="w-4 h-4 mr-2" />
                 View Templates
-              </button>
+              </Button>
             </div>
 
             {/* Trust Indicators with Icons */}
