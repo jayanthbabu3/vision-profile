@@ -17,28 +17,24 @@ const Header = () => {
             <span className="font-heading font-bold text-xl">ResumeAI</span>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="/templates" className="btn-ghost">
-              Templates
-            </a>
-            <a href="/super-resumes" className="btn-ghost">
-              Examples
-            </a>
-            <a href="/pricing" className="btn-ghost">
-              Pricing
-            </a>
-          </nav>
-
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Desktop Navigation & Actions */}
+          <div className="hidden md:flex items-center gap-8">
+            <nav className="flex items-center gap-8">
+              <a href="/templates" className="btn-ghost">
+                Templates
+              </a>
+              <a href="/super-resumes" className="btn-ghost">
+                Examples
+              </a>
+              <a href="/pricing" className="btn-ghost">
+                Pricing
+              </a>
+            </nav>
+            
             <Button variant="ghost" size="sm">
               <User className="w-4 h-4 mr-2" />
               Sign In
             </Button>
-            <button className="btn-hero">
-              Start Building
-            </button>
           </div>
 
           {/* Mobile Menu Button */}

@@ -7,8 +7,9 @@ const HeroSection = () => {
     <section className="relative pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-subtle"></div>
-      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+      <div className="absolute top-20 right-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-72 h-72 bg-accent/8 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/3 rounded-full blur-3xl"></div>
 
       <div className="relative max-w-container mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -31,12 +32,12 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="btn-hero group">
+              <button className="btn-hero-new group">
                 Start Building
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </button>
               
-              <button className="btn-secondary group">
+              <button className="btn-secondary-new group">
                 <Play className="w-4 h-4 mr-2" />
                 View Templates
               </button>

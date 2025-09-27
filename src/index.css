@@ -155,8 +155,16 @@
     @apply bg-gradient-to-r from-primary to-primary-hover text-primary-foreground px-8 py-4 rounded-2xl font-medium shadow-premium hover:shadow-lg transition-all duration-200 hover:scale-[1.02];
   }
 
+  .btn-hero-new {
+    @apply inline-flex items-center justify-center bg-gradient-to-r from-primary to-primary-hover text-primary-foreground px-6 py-3 rounded-xl font-medium shadow-soft hover:shadow-premium transition-all duration-200 hover:scale-[1.02];
+  }
+
   .btn-secondary {
     @apply bg-surface text-foreground border-2 border-border px-8 py-4 rounded-2xl font-medium hover:border-primary/30 hover:bg-slate-50 transition-all duration-200;
+  }
+
+  .btn-secondary-new {
+    @apply inline-flex items-center justify-center bg-surface text-slate-600 border border-border px-6 py-3 rounded-xl font-medium hover:border-primary/30 hover:text-primary hover:bg-slate-50 transition-all duration-200;
   }
 
   .btn-ghost {
