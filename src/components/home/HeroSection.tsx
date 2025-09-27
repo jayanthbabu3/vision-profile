@@ -9,20 +9,24 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-50"></div>
       
       {/* SVG-style Background Shapes */}
-      <div className="absolute top-20 right-10 w-32 h-32 opacity-30">
-        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent rounded-full"></div>
-        <div className="absolute top-4 left-4 w-24 h-24 border-2 border-primary/20 rounded-full"></div>
-        <div className="absolute top-8 left-8 w-16 h-16 bg-accent/10 rounded-full"></div>
+      <div className="absolute top-20 right-10 w-32 h-32 opacity-60">
+        <div className="w-full h-full bg-gradient-to-br from-primary/30 to-primary/10 rounded-full"></div>
+        <div className="absolute top-4 left-4 w-24 h-24 border-2 border-primary/40 rounded-full animate-pulse"></div>
+        <div className="absolute top-8 left-8 w-16 h-16 bg-accent/20 rounded-full"></div>
       </div>
       
-      <div className="absolute bottom-40 left-10 w-40 h-40 opacity-20">
-        <div className="w-full h-full border-2 border-accent/30 rounded-full"></div>
-        <div className="absolute top-6 left-6 w-28 h-28 bg-gradient-to-br from-accent/10 to-transparent rounded-full"></div>
+      <div className="absolute bottom-40 left-10 w-40 h-40 opacity-50">
+        <div className="w-full h-full border-2 border-accent/50 rounded-full"></div>
+        <div className="absolute top-6 left-6 w-28 h-28 bg-gradient-to-br from-accent/20 to-accent/5 rounded-full"></div>
       </div>
       
-      <div className="absolute top-32 left-1/4 w-6 h-6 bg-primary/20 rounded-full opacity-40"></div>
-      <div className="absolute bottom-60 right-1/4 w-4 h-4 bg-accent/30 rounded-full opacity-50"></div>
-      <div className="absolute top-60 right-1/3 w-8 h-8 border border-primary/20 rounded-full opacity-30"></div>
+      <div className="absolute top-32 left-1/4 w-8 h-8 bg-primary/30 rounded-full opacity-70 animate-pulse"></div>
+      <div className="absolute bottom-60 right-1/4 w-6 h-6 bg-accent/40 rounded-full opacity-80"></div>
+      <div className="absolute top-60 right-1/3 w-10 h-10 border-2 border-primary/30 rounded-full opacity-60"></div>
+      
+      {/* Additional geometric shapes */}
+      <div className="absolute top-40 left-20 w-12 h-12 border border-primary/25 rotate-45 opacity-50"></div>
+      <div className="absolute bottom-20 right-32 w-16 h-16 bg-gradient-to-br from-accent/15 to-transparent rotate-12 opacity-60"></div>
       
       {/* Floating geometric shapes */}
       <div className="absolute top-24 right-16 w-64 h-64 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-3xl animate-pulse"></div>
@@ -54,9 +58,9 @@ const HeroSection = () => {
                 <br className="hidden sm:block" />
                 <span className="text-gradient">ATS-friendly</span> resume
               </h1>
-              <p className="text-lg lg:text-xl text-slate-600 leading-relaxed max-w-xl">
+              <p className="text-lg lg:text-xl text-slate-700 leading-relaxed max-w-xl font-medium">
                 Pick your role, choose a template, let AI tailor your resume to any job description. 
-                Get hired faster with professional, ATS-optimized resumes.
+                <span className="text-slate-800 font-semibold">Get hired faster</span> with professional, ATS-optimized resumes.
               </p>
             </div>
 
