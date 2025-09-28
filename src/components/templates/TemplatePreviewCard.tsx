@@ -4,8 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { TemplateSchema, SampleResumeData } from "@/lib/template-schemas";
-import TemplateRenderer from "@/components/resume/TemplateRenderer";
-
+import TemplateCardPreview from "./TemplateCardPreview";
 export interface TemplatePreviewCardProps {
   id: string;
   name: string;
@@ -98,38 +97,7 @@ const TemplatePreviewCard = ({
       {/* Template Preview Container */}
       <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-background to-muted/20">
         {templateSchema && sampleData ? (
-          <div className="w-full h-full flex items-center justify-center p-2">
-            <div 
-              className="bg-white shadow-sm border rounded-sm overflow-hidden relative"
-              style={{
-                width: '90%',
-                height: '95%',
-              }}
-            >
-              <div className="w-full h-full overflow-hidden relative flex items-center justify-center">
-                <div style={{ 
-                  transform: 'scale(0.28)', 
-                  transformOrigin: 'center center',
-                  width: '357%',
-                  height: '357%',
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  marginLeft: '-178.5%',
-                  marginTop: '-178.5%'
-                }}>
-                  <TemplateRenderer 
-                    template={{
-                      ...templateSchema,
-                      page: { ...templateSchema.page, margins: 8 }
-                    }} 
-                    data={sampleData}
-                    className="border-0 shadow-none rounded-none overflow-hidden"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <TemplateCardPreview template={templateSchema} data={sampleData} />
         ) : (
           // Fallback to image based on template ID/category
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted/10 to-muted/30">
