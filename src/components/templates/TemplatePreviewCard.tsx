@@ -36,21 +36,6 @@ const TemplatePreviewCard = ({
     if (onUse) onUse(id);
   };
 
-  const getCategoryColor = (category: string) => {
-    switch (category.toLowerCase()) {
-      case 'modern':
-        return 'text-blue-600 bg-blue-50 border-blue-200';
-      case 'classic':
-        return 'text-emerald-600 bg-emerald-50 border-emerald-200';
-      case 'creative':
-        return 'text-purple-600 bg-purple-50 border-purple-200';
-      case 'professional':
-        return 'text-indigo-600 bg-indigo-50 border-indigo-200';
-      default:
-        return 'text-slate-600 bg-slate-50 border-slate-200';
-    }
-  };
-
   const getTemplateImage = () => {
     if (id === 'classic' || category.toLowerCase() === 'classic') {
       return "/assets/template-classic.jpg";
@@ -64,12 +49,12 @@ const TemplatePreviewCard = ({
   };
 
   return (
-    <Card className="group relative overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+    <Card className="group relative overflow-hidden bg-card border border-border shadow-sm hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1">
       {/* Premium Badge */}
       {isPremium && (
-        <div className="absolute top-4 right-4 z-10">
-          <Badge className="bg-gradient-to-r from-amber-400 to-orange-500 text-white border-0 shadow-lg px-3 py-1">
-            <Crown className="w-3 h-3 mr-1.5" />
+        <div className="absolute top-5 right-5 z-10">
+          <Badge className="bg-gradient-to-r from-amber-400 to-orange-500 text-white border-0 shadow-lg px-3 py-1.5 rounded-full">
+            <Crown className="w-3.5 h-3.5 mr-1.5" />
             Premium
           </Badge>
         </div>
@@ -77,44 +62,33 @@ const TemplatePreviewCard = ({
 
       {/* Template Image */}
       <div 
-        className="relative aspect-[4/5] overflow-hidden cursor-pointer"
+        className="relative aspect-[3/4] overflow-hidden cursor-pointer bg-muted/20"
         onClick={handlePreview}
       >
         <img 
           src={getTemplateImage()}
           alt={`${name} template preview`}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* Preview Button Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <Button
-            size="sm"
-            className="bg-white/95 backdrop-blur-sm text-gray-900 hover:bg-white shadow-lg border-0"
-          >
-            <Eye className="w-4 h-4 mr-2" />
-            Preview
-          </Button>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      <CardContent className="p-6 space-y-4">
+      <CardContent className="p-8 space-y-6">
         {/* Category and Title */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           <Badge 
             variant="secondary" 
-            className={`${getCategoryColor(category)} text-xs font-medium px-2.5 py-1`}
+            className="text-xs font-medium px-3 py-1.5 rounded-full bg-secondary/80 text-secondary-foreground border-0"
           >
             {category}
           </Badge>
           
-          <div>
-            <h3 className="font-semibold text-lg text-gray-900 leading-tight mb-1">
+          <div className="space-y-2">
+            <h3 className="font-semibold text-xl text-foreground leading-tight">
               {name}
             </h3>
             {description && (
-              <p className="text-sm text-gray-600 line-clamp-2">
+              <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                 {description}
               </p>
             )}
@@ -122,18 +96,18 @@ const TemplatePreviewCard = ({
         </div>
 
         {/* Features */}
-        <div className="flex items-center gap-4 text-xs text-gray-500">
-          <div className="flex items-center gap-1">
-            <Shield className="w-3.5 h-3.5 text-green-500" />
+        <div className="flex items-center gap-5 text-xs text-muted-foreground">
+          <div className="flex items-center gap-1.5">
+            <Shield className="w-4 h-4 text-green-500" />
             <span>ATS-Ready</span>
           </div>
-          <div className="flex items-center gap-1">
-            <Award className="w-3.5 h-3.5 text-blue-500" />
+          <div className="flex items-center gap-1.5">
+            <Award className="w-4 h-4 text-blue-500" />
             <span>Professional</span>
           </div>
           {isPremium && (
-            <div className="flex items-center gap-1">
-              <Zap className="w-3.5 h-3.5 text-amber-500" />
+            <div className="flex items-center gap-1.5">
+              <Zap className="w-4 h-4 text-amber-500" />
               <span>Premium</span>
             </div>
           )}
@@ -145,13 +119,13 @@ const TemplatePreviewCard = ({
             {tags.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
-                className="inline-block px-2.5 py-1 text-xs bg-gray-50 text-gray-600 rounded-full border border-gray-200"
+                className="inline-block px-3 py-1.5 text-xs bg-muted/50 text-muted-foreground rounded-full border border-border/50"
               >
                 {tag}
               </span>
             ))}
             {tags.length > 3 && (
-              <span className="inline-block px-2.5 py-1 text-xs bg-gray-50 text-gray-500 rounded-full border border-gray-200">
+              <span className="inline-block px-3 py-1.5 text-xs bg-muted/30 text-muted-foreground/70 rounded-full border border-border/30">
                 +{tags.length - 3}
               </span>
             )}
@@ -159,11 +133,11 @@ const TemplatePreviewCard = ({
         )}
 
         {/* Action Buttons */}
-        <div className="flex gap-3 pt-2">
+        <div className="flex gap-3 pt-3">
           <Button 
             variant="outline" 
             size="sm"
-            className="flex-1 text-gray-700 border-gray-200 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 transition-colors"
+            className="flex-1 border-border hover:bg-accent hover:text-accent-foreground transition-colors"
             onClick={handlePreview}
           >
             <Eye className="w-4 h-4 mr-2" />
