@@ -1,13 +1,13 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { TemplatesContainer } from "@/components/templates";
+import CategoryTemplatesView from "@/components/templates/CategoryTemplatesView";
 
 const Templates = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <TemplatesContainer />
+        <CategoryTemplatesView />
       </main>
       <Footer />
     </div>
