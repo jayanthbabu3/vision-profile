@@ -399,6 +399,12 @@ export default function TemplateRenderer({
         fontFamily,
         color: textColor,
         lineHeight: 1.4,
+        // Ensure content scales properly within the container
+        maxWidth: '100%',
+        boxSizing: 'border-box',
+        // Ensure the resume doesn't fill the entire container
+        height: 'auto',
+        minHeight: 'fit-content',
       }}
     >
       <RenderBlock block={template.layout} data={data} theme={template} />

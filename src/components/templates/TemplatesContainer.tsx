@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import TemplatePreviewCard, { TemplatePreviewCardProps } from "./TemplatePreviewCard";
 import SimplePreviewModal from "./SimplePreviewModal";
+import TemplateCarousel from "./TemplateCarousel";
 import { useNavigate } from "react-router-dom";
 import { getAllTemplates, templateRegistry } from "@/lib/template-registry";
 import "@/lib/template-schemas"; // Import to register templates
@@ -37,6 +38,7 @@ const TemplatesContainer = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [previewTemplate, setPreviewTemplate] = useState<TemplatePreviewCardProps | null>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"grid" | "carousel">("carousel");
 
   // Filter and search templates
   useEffect(() => {
@@ -159,9 +161,14 @@ const TemplatesContainer = () => {
             </Button>
 
             {/* View Toggle */}
-            <Button variant="outline" size="lg" className="gap-2">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="gap-2"
+              onClick={() => setViewMode(viewMode === "grid" ? "carousel" : "grid")}
+            >
               <Grid3X3 className="w-4 h-4" />
-              Grid View
+              {viewMode === "grid" ? "Carousel View" : "Grid View"}
             </Button>
           </div>
         </div>
@@ -209,18 +216,26 @@ const TemplatesContainer = () => {
           )}
         </div>
 
-        {/* Templates Grid */}
+        {/* Templates Display */}
         {filteredTemplates.length > 0 ? (
-          <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-            {filteredTemplates.map((template) => (
-              <TemplatePreviewCard
-                key={template.id}
-                {...template}
-                onPreview={handlePreview}
-                onUse={handleUse}
-              />
-            ))}
-          </div>
+          viewMode === "carousel" ? (
+            <TemplateCarousel
+              templates={filteredTemplates}
+              onPreview={handlePreview}
+              onUse={handleUse}
+            />
+          ) : (
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+              {filteredTemplates.map((template) => (
+                <TemplatePreviewCard
+                  key={template.id}
+                  {...template}
+                  onPreview={handlePreview}
+                  onUse={handleUse}
+                />
+              ))}
+            </div>
+          )
         ) : (
           <div className="text-center py-20">
             <div className="w-20 h-20 bg-gradient-to-br from-muted to-muted/50 rounded-2xl flex items-center justify-center mx-auto mb-6">

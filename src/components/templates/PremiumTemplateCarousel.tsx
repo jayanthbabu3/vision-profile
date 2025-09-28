@@ -84,7 +84,7 @@ const PremiumTemplateCarousel = ({
                         <img 
                           src={template.image}
                           alt={`${template.name} template`}
-                          className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
+                          className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                     </div>

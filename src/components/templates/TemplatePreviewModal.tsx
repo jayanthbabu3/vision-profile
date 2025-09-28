@@ -105,7 +105,7 @@ const TemplatePreviewModal = ({
                   <img
                     src={template.previewUrl}
                     alt={template.name}
-                    className="w-full h-auto max-h-96 object-cover"
+                    className="w-full h-auto max-h-96 object-contain"
                   />
                 ) : (
                   <div className="h-96 flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">

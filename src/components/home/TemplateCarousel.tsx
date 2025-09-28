@@ -151,7 +151,7 @@ const TemplateCarousel = () => {
                       <img
                         src={template.image}
                         alt={template.name}
-                        className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-700 ease-out"
+                        className="w-full h-full object-contain group-hover/card:scale-110 transition-transform duration-700 ease-out"
                       />
                       
                       {/* Premium Overlay with Glassmorphism */}
