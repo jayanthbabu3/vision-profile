@@ -24,22 +24,28 @@ export default function TemplateCardPreview({ template, data }: TemplateCardPrev
 
     // Reset transforms to measure natural content size
     content.style.transform = "none";
-    content.style.left = "0px";
-    content.style.top = "0px";
-
+    
     const cw = container.clientWidth;
     const ch = container.clientHeight;
 
-    // Use scrollWidth/scrollHeight to get natural size
-    const iw = content.scrollWidth || content.clientWidth || 1;
-    const ih = content.scrollHeight || content.clientHeight || 1;
+    // Force a layout recalculation and get the natural size
+    const iw = content.scrollWidth;
+    const ih = content.scrollHeight;
 
-    const nextScale = Math.min(cw / iw, ch / ih);
+    if (iw <= 0 || ih <= 0) return;
+
+    // Calculate scale to fit both width and height
+    const scaleX = cw / iw;
+    const scaleY = ch / ih;
+    const nextScale = Math.min(scaleX, scaleY);
+
+    // Calculate scaled dimensions
     const scaledW = iw * nextScale;
     const scaledH = ih * nextScale;
 
-    const ox = Math.max(0, (cw - scaledW) / 2);
-    const oy = Math.max(0, (ch - scaledH) / 2);
+    // Center the scaled content
+    const ox = (cw - scaledW) / 2;
+    const oy = (ch - scaledH) / 2;
 
     setScale(nextScale);
     setOffset({ x: ox, y: oy });
