@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ResumeEditor from "@/components/resume/ResumeEditor";
 import { getTemplate } from "@/lib/template-registry";
+import { SampleResumeData } from "@/lib/template-schemas";
 
 const ResumeBuilder = () => {
   const { templateId } = useParams<{ templateId: string }>();

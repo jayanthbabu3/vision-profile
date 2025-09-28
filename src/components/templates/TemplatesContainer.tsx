@@ -1,42 +1,29 @@
 import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
+import { Search, Filter, Grid3X3, Sparkles, Star, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import TemplateCard, { TemplateCardProps } from "./TemplateCard";
+import TemplatePreviewCard, { TemplatePreviewCardProps } from "./TemplatePreviewCard";
 import SimplePreviewModal from "./SimplePreviewModal";
 import { useNavigate } from "react-router-dom";
 import { getAllTemplates, templateRegistry } from "@/lib/template-registry";
 import "@/lib/template-schemas"; // Import to register templates
 
-// Convert template definitions to TemplateCardProps format
-const convertToTemplateCardProps = (def: any): TemplateCardProps => ({
+// Convert template definitions to TemplatePreviewCardProps format
+const convertToTemplatePreviewCardProps = (def: any): TemplatePreviewCardProps => ({
   id: def.id,
   name: def.name,
   description: def.description,
   category: def.category,
   tags: def.tags,
   isPremium: def.isPremium,
-  previewUrl: def.previewUrl || `/assets/template-${def.category.toLowerCase()}.jpg`,
-  templateUrl: null,
-  isActive: true,
-  createdAt: new Date("2024-01-15"),
-  updatedAt: new Date("2024-01-15"),
-  sections: [
-    { id: "1", name: "Header", order: 1, isRequired: true, config: {} },
-    { id: "2", name: "Summary", order: 2, isRequired: false, config: {} },
-    { id: "3", name: "Experience", order: 3, isRequired: true, config: {} },
-    { id: "4", name: "Education", order: 4, isRequired: true, config: {} },
-    { id: "5", name: "Skills", order: 5, isRequired: true, config: {} },
-  ],
-  // Add template schema and sample data for preview
   templateSchema: def.schema,
   sampleData: def.sampleData,
 });
 
 // Get all templates from registry
 const allTemplates = getAllTemplates();
-const templates: TemplateCardProps[] = allTemplates.map(convertToTemplateCardProps);
+const templates: TemplatePreviewCardProps[] = allTemplates.map(convertToTemplatePreviewCardProps);
 
 // Get categories from registry
 const registryCategories = templateRegistry.getCategories();
@@ -44,11 +31,11 @@ const categories = ["All", ...registryCategories];
 
 const TemplatesContainer = () => {
   const navigate = useNavigate();
-  const [templateList, setTemplateList] = useState<TemplateCardProps[]>(templates);
-  const [filteredTemplates, setFilteredTemplates] = useState<TemplateCardProps[]>(templates);
+  const [templateList, setTemplateList] = useState<TemplatePreviewCardProps[]>(templates);
+  const [filteredTemplates, setFilteredTemplates] = useState<TemplatePreviewCardProps[]>(templates);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [previewTemplate, setPreviewTemplate] = useState<TemplateCardProps | null>(null);
+  const [previewTemplate, setPreviewTemplate] = useState<TemplatePreviewCardProps | null>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
   // Filter and search templates
@@ -103,70 +90,130 @@ const TemplatesContainer = () => {
   const stats = getTemplateStats();
 
   return (
-    <div className="min-h-screen bg-background py-8">
-      <div className="max-w-container mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="font-heading font-bold text-3xl lg:text-4xl mb-2">
-                Resume Templates
-              </h1>
-              <p className="text-slate-600">
-                Choose from our collection of professionally designed, ATS-friendly resume templates
-              </p>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-primary/10 to-transparent">
+        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16">
+          <div className="text-center space-y-6">
+            <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
+              <Sparkles className="w-4 h-4" />
+              <span>Premium Resume Templates</span>
             </div>
             
+            <h1 className="font-heading font-bold text-4xl lg:text-6xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Professional Resume
+              <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"> Templates</span>
+            </h1>
+            
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Choose from our collection of expertly designed, ATS-friendly resume templates. 
+              <br />
+              Each template is crafted to help you land your dream job.
+            </p>
+
             {/* Stats */}
-            <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center justify-center space-x-8 pt-6">
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">{stats.total}</div>
-                <div className="text-sm text-slate-500">Templates</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">{stats.total}+</div>
+                <div className="text-sm text-muted-foreground">Templates</div>
+              </div>
+              <div className="w-px h-12 bg-border"></div>
+              <div className="text-center">
+                <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">98%</div>
+                <div className="text-sm text-muted-foreground">ATS Compatible</div>
+              </div>
+              <div className="w-px h-12 bg-border"></div>
+              <div className="text-center">
+                <div className="flex items-center justify-center space-x-1 mb-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <div className="text-sm text-muted-foreground">5-Star Quality</div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Search */}
-          <div className="flex justify-center">
-            <div className="relative w-full max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        {/* Search and Filters */}
+        <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 mb-12 shadow-lg">
+          <div className="flex flex-col lg:flex-row gap-6 items-center">
+            {/* Search */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
               <Input
-                placeholder="Search templates..."
+                placeholder="Search templates by name, style, or industry..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
+                className="pl-12 pr-4 py-3 bg-background/50 border-border/50 focus:border-primary/50 focus:bg-background transition-all duration-300"
               />
             </div>
+
+            {/* Filter Button */}
+            <Button variant="outline" size="lg" className="gap-2">
+              <Filter className="w-4 h-4" />
+              Filters
+            </Button>
+
+            {/* View Toggle */}
+            <Button variant="outline" size="lg" className="gap-2">
+              <Grid3X3 className="w-4 h-4" />
+              Grid View
+            </Button>
           </div>
         </div>
 
         {/* Category Filters */}
-        <div className="flex justify-center gap-2 mb-8 flex-wrap">
+        <div className="flex justify-center gap-3 mb-12 flex-wrap">
           {categories.map((category) => (
             <Button
               key={category}
               variant={selectedCategory === category ? "default" : "outline"}
-              size="sm"
+              size="lg"
               onClick={() => setSelectedCategory(category)}
-              className="px-6"
+              className={`px-8 py-3 transition-all duration-300 ${
+                selectedCategory === category 
+                  ? "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/25" 
+                  : "hover:bg-primary/5 hover:text-primary hover:border-primary/30"
+              }`}
             >
-              {category === "All" ? "All Templates" : category}
+              {category === "All" ? (
+                <>
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  All Templates
+                </>
+              ) : (
+                category
+              )}
             </Button>
           ))}
         </div>
 
-        {/* Results */}
-        <div className="mb-4">
-          <p className="text-slate-600">
-            Showing {filteredTemplates.length} of {templateList.length} templates
-          </p>
+        {/* Results Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center space-x-4">
+            <h2 className="text-2xl font-bold">Templates</h2>
+            <Badge variant="secondary" className="bg-muted/50 text-muted-foreground">
+              {filteredTemplates.length} of {templateList.length}
+            </Badge>
+          </div>
+          
+          {filteredTemplates.length > 0 && (
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <TrendingUp className="w-4 h-4" />
+              <span>Trending designs</span>
+            </div>
+          )}
         </div>
 
         {/* Templates Grid */}
         {filteredTemplates.length > 0 ? (
-          <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4">
+          <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
             {filteredTemplates.map((template) => (
-              <TemplateCard
+              <TemplatePreviewCard
                 key={template.id}
                 {...template}
                 onPreview={handlePreview}
@@ -175,29 +222,44 @@ const TemplatesContainer = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-8 h-8 text-slate-400" />
+          <div className="text-center py-20">
+            <div className="w-20 h-20 bg-gradient-to-br from-muted to-muted/50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <Search className="w-10 h-10 text-muted-foreground" />
             </div>
-            <h3 className="font-heading font-semibold text-lg mb-2">No templates found</h3>
-            <p className="text-slate-600 mb-4">
-              Try adjusting your search or filter criteria
+            <h3 className="font-heading font-bold text-2xl mb-3">No templates found</h3>
+            <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+              We couldn't find any templates matching your criteria. Try adjusting your search or filter settings.
             </p>
             <Button
               variant="outline"
+              size="lg"
               onClick={() => {
                 setSearchQuery("");
                 setSelectedCategory("All");
               }}
+              className="px-8"
             >
-              Clear Filters
+              <Sparkles className="w-4 h-4 mr-2" />
+              Show All Templates
             </Button>
           </div>
         )}
 
         {/* Preview Modal */}
         <SimplePreviewModal
-          template={previewTemplate}
+          template={previewTemplate ? {
+            id: previewTemplate.id,
+            name: previewTemplate.name,
+            description: previewTemplate.description,
+            category: previewTemplate.category,
+            tags: previewTemplate.tags,
+            isPremium: previewTemplate.isPremium,
+            previewUrl: '',
+            templateUrl: '',
+            createdAt: new Date(),
+            templateSchema: previewTemplate.templateSchema,
+            sampleData: previewTemplate.sampleData
+          } : null}
           isOpen={isPreviewOpen}
           onClose={handleClosePreview}
           onUse={handleUse}
