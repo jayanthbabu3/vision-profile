@@ -105,10 +105,10 @@ const CategoryTemplatesView = () => {
       />
 
       {/* Stats Section */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 bg-white/50 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/60">
               <div className="text-4xl font-bold text-primary mb-2">
                 {allTemplates.length}+
               </div>
@@ -116,7 +116,7 @@ const CategoryTemplatesView = () => {
                 Professional Templates
               </div>
             </div>
-            <div>
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/60">
               <div className="text-4xl font-bold text-primary mb-2">
                 {categories.length - 1}
               </div>
@@ -124,7 +124,7 @@ const CategoryTemplatesView = () => {
                 Industry Categories
               </div>
             </div>
-            <div>
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/60">
               <div className="text-4xl font-bold text-primary mb-2">
                 100%
               </div>

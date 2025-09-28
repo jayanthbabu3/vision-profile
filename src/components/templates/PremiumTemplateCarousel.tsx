@@ -51,41 +51,43 @@ const PremiumTemplateCarousel = ({
   }
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             {title}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {subtitle}
           </p>
         </div>
 
         {/* Carousel */}
-        <div className="relative max-w-7xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           <Carousel
             opts={{
-              align: "center",
+              align: "start",
               loop: true,
             }}
             className="w-full"
           >
-            <CarouselContent className="-ml-4">
-              {displayTemplates.map((template) => (
-                <CarouselItem key={template.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+            <CarouselContent className="-ml-6">
+              {displayTemplates.map((template, index) => (
+                <CarouselItem key={template.id} className="pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                   <div 
                     className="cursor-pointer group"
                     onClick={() => handleTemplateClick(template.id)}
                   >
-                    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                      <div className="aspect-[3/4] overflow-hidden bg-gray-50">
-                        <img 
-                          src={template.image}
-                          alt={`${template.name} template`}
-                          className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
-                        />
+                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/60 group-hover:scale-[1.02]">
+                      <div className="p-4">
+                        <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200/50">
+                          <img 
+                            src={template.image}
+                            alt={`${template.name} template`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -93,10 +95,20 @@ const PremiumTemplateCarousel = ({
               ))}
             </CarouselContent>
             
-            {/* Navigation Arrows */}
-            <CarouselPrevious className="absolute -left-12 top-1/2 -translate-y-1/2 h-10 w-10 bg-white border border-gray-300 hover:bg-gray-50 shadow-lg rounded-full" />
-            <CarouselNext className="absolute -right-12 top-1/2 -translate-y-1/2 h-10 w-10 bg-white border border-gray-300 hover:bg-gray-50 shadow-lg rounded-full" />
+            {/* Navigation Arrows - Hidden on mobile */}
+            <CarouselPrevious className="absolute -left-6 top-1/2 -translate-y-1/2 h-12 w-12 bg-white/90 backdrop-blur-sm border border-white/60 hover:bg-white shadow-xl rounded-full hidden md:flex" />
+            <CarouselNext className="absolute -right-6 top-1/2 -translate-y-1/2 h-12 w-12 bg-white/90 backdrop-blur-sm border border-white/60 hover:bg-white shadow-xl rounded-full hidden md:flex" />
           </Carousel>
+          
+          {/* Navigation Dots */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {displayTemplates.map((_, index) => (
+              <div 
+                key={index} 
+                className="w-2 h-2 rounded-full bg-primary/30 hover:bg-primary/60 transition-colors cursor-pointer"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
