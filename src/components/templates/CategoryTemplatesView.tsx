@@ -1,6 +1,4 @@
-import React, { useState, useMemo } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import React, { useMemo } from "react";
 import PremiumTemplateCarousel from "./PremiumTemplateCarousel";
 import { templateRegistry } from "@/lib/template-registry";
 // Import to ensure templates are registered
@@ -13,11 +11,11 @@ interface Template {
   image: string;
 }
 
-const CategoryTemplatesView = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+type StatsTone = "primary" | "accent" | "neutral";
 
-  // Get all templates and convert to our format
-  const allTemplates: Template[] = useMemo(() => {
+const CategoryTemplatesView = () => {
+  // Collect templates once so downstream sections stay in sync
+  const templates: Template[] = useMemo(() => {
     return templateRegistry.getAllTemplates().map(template => ({
       id: template.id,
       name: template.name,
@@ -30,108 +28,57 @@ const CategoryTemplatesView = () => {
     return "/assets/resume-template.png";
   }
 
-  // Get unique categories
-  const categories = useMemo(() => {
-    const cats = Array.from(new Set(allTemplates.map(t => t.category)));
-    return ["All", ...cats];
-  }, [allTemplates]);
-
-  // Filter templates by category
-  const filteredTemplates = useMemo(() => {
-    if (selectedCategory === "All") return allTemplates;
-    return allTemplates.filter(t => t.category === selectedCategory);
-  }, [allTemplates, selectedCategory]);
-
-  // Category to role mapping for better UX
-  const categoryRoles: Record<string, string[]> = {
-    "Professional": ["Software Engineer", "Product Manager", "Marketing Manager"],
-    "Creative": ["Designer", "Content Creator", "Artist"],
-    "Academic": ["Teacher", "Researcher", "Professor"],
-    "Business": ["Sales Manager", "Business Analyst", "Consultant"],
-    "Healthcare": ["Nurse", "Doctor", "Medical Assistant"],
-    "Technical": ["Data Scientist", "DevOps Engineer", "System Administrator"]
-  };
+  const templateCount = templates.length;
+  const uniqueCategories = useMemo(() => {
+    return Array.from(new Set(templates.map((template) => template.category))).length;
+  }, [templates]);
 
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="py-24 bg-gradient-to-br from-background to-muted/20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            Resume Templates
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
-            Choose from our collection of professional resume templates designed for different industries and career levels.
-          </p>
-          
-          {/* Category Pills */}
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                size="lg"
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-3 text-sm font-medium transition-all duration-200 ${
-                  selectedCategory === category
-                    ? "bg-primary text-primary-foreground shadow-lg"
-                    : "bg-background hover:bg-accent hover:text-accent-foreground border-border"
-                }`}
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
-
-          {/* Role suggestions for selected category */}
-          {selectedCategory !== "All" && categoryRoles[selectedCategory] && (
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              <span className="text-sm text-muted-foreground mr-2">Perfect for:</span>
-              {categoryRoles[selectedCategory].map((role, index) => (
-                <Badge key={role} variant="secondary" className="text-xs">
-                  {role}
-                </Badge>
-              ))}
+      <section className="relative overflow-hidden py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background" />
+        <div className="absolute inset-x-0 -bottom-24 h-64 bg-primary/20 blur-3xl opacity-60" />
+        <div className="relative container mx-auto px-6">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
+              Signature Collection
             </div>
-          )}
+            <h1 className="mt-6 font-heading text-4xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+              Resume templates refined for modern professionals
+            </h1>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+              Thoughtfully designed layouts that mirror the style of our platform—crisp typography, elevated color accents, and the perfect balance of white space.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Templates Carousel */}
-      <PremiumTemplateCarousel 
-        templates={filteredTemplates}
-        title={selectedCategory === "All" ? "All Templates" : `${selectedCategory} Templates`}
-        subtitle={`${filteredTemplates.length} professional templates available${selectedCategory !== "All" ? ` for ${selectedCategory.toLowerCase()} roles` : ""}`}
-      />
+      <PremiumTemplateCarousel templates={templates} />
 
       {/* Stats Section */}
-      <section className="py-16 bg-white/50 backdrop-blur-sm">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/60">
-              <div className="text-4xl font-bold text-primary mb-2">
-                {allTemplates.length}+
-              </div>
-              <div className="text-muted-foreground">
-                Professional Templates
-              </div>
-            </div>
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/60">
-              <div className="text-4xl font-bold text-primary mb-2">
-                {categories.length - 1}
-              </div>
-              <div className="text-muted-foreground">
-                Industry Categories
-              </div>
-            </div>
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/60">
-              <div className="text-4xl font-bold text-primary mb-2">
-                100%
-              </div>
-              <div className="text-muted-foreground">
-                ATS Compatible
-              </div>
-            </div>
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="grid gap-6 md:grid-cols-3">
+            <StatsCard
+              tone="primary"
+              value={`${templateCount}+`}
+              title="Handcrafted Templates"
+              description="Every layout keeps our Inter-based typography, intentional spacing, and signature accents."
+            />
+            <StatsCard
+              tone="accent"
+              value={String(uniqueCategories)}
+              title="Distinct Style Families"
+              description="Move from executive polish to creative flair without stepping outside the ResumeAI design language."
+            />
+            <StatsCard
+              tone="neutral"
+              value="100%"
+              title="ATS-First Structure"
+              description="High-contrast type, semantic hierarchy, and our default font stack keep parsing engines and recruiters aligned."
+            />
           </div>
         </div>
       </section>
@@ -140,3 +87,67 @@ const CategoryTemplatesView = () => {
 };
 
 export default CategoryTemplatesView;
+
+interface StatsCardProps {
+  tone: StatsTone;
+  value: string;
+  title: string;
+  description: string;
+}
+
+const toneStyles: Record<StatsTone, {
+  glow: string;
+  circle: string;
+  ring: string;
+  inner: string;
+  text: string;
+}> = {
+  primary: {
+    glow: "from-primary/20 via-transparent to-primary/5",
+    circle: "bg-gradient-to-br from-primary/25 via-primary/10 to-primary/5",
+    ring: "border-primary/40",
+    inner: "bg-white/70",
+    text: "text-primary",
+  },
+  accent: {
+    glow: "from-accent/25 via-transparent to-primary/8",
+    circle: "bg-gradient-to-br from-accent/30 via-accent/15 to-primary/10",
+    ring: "border-accent/35",
+    inner: "bg-white/70",
+    text: "text-accent",
+  },
+  neutral: {
+    glow: "from-foreground/20 via-transparent to-primary/5",
+    circle: "bg-gradient-to-br from-foreground/15 via-muted/20 to-primary/5",
+    ring: "border-foreground/25",
+    inner: "bg-white/80",
+    text: "text-foreground",
+  },
+};
+
+function StatsCard({ tone, value, title, description }: StatsCardProps) {
+  const styles = toneStyles[tone];
+
+  return (
+    <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-xl backdrop-blur">
+      <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${styles.glow} opacity-80`} />
+      <div className="relative flex items-center gap-5">
+        <div className={`relative flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full shadow-inner ${styles.circle}`}>
+          <div className={`absolute inset-0 rounded-full border ${styles.ring}`} />
+          <div className={`absolute inset-2 rounded-full ${styles.inner}`} />
+          <span className={`relative font-heading text-2xl font-semibold ${styles.text}`}>
+            {value}
+          </span>
+        </div>
+        <div className="text-left">
+          <p className="font-heading text-lg font-semibold text-foreground">
+            {title}
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            {description}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

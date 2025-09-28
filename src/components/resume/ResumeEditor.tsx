@@ -72,6 +72,8 @@ export default function ResumeEditor({
 
   const [activeTab, setActiveTab] = useState("basics");
 
+  const previewWidth = template.page?.size === "Letter" ? 816 : 794;
+
   // PDF Export function
   const handleExportPDF = async () => {
     if (!resumeContainerRef.current) {
@@ -323,7 +325,7 @@ export default function ResumeEditor({
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4">
+    <div className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1400px]">
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">
@@ -352,11 +354,11 @@ export default function ResumeEditor({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_auto]">
           {/* Left: Form */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-4 rounded-full bg-muted/50 p-1">
                 <TabsTrigger value="basics">Basics</TabsTrigger>
                 <TabsTrigger value="experience">Experience</TabsTrigger>
                 <TabsTrigger value="education">Education</TabsTrigger>
@@ -364,11 +366,22 @@ export default function ResumeEditor({
               </TabsList>
 
               <TabsContent value="basics" className="space-y-4">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Personal Information</CardTitle>
+                <Card className="overflow-hidden border border-border/80 bg-card/90 shadow-lg">
+                  <CardHeader className="relative border-b border-border/80 pb-6">
+                    <div className="absolute -inset-x-6 -top-24 h-32 bg-gradient-to-br from-primary/25 via-primary/10 to-transparent blur-3xl" />
+                    <div className="relative flex items-center justify-between">
+                      <div>
+                        <CardTitle className="font-heading text-lg text-foreground">Personal Information</CardTitle>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          Keep your professional identity crisp and consistent across every application.
+                        </p>
+                      </div>
+                      <Badge variant="outline" className="rounded-full border-primary/40 text-primary">
+                        Profile
+                      </Badge>
+                    </div>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="mb-2 block text-sm font-medium">Full Name</label>
@@ -418,7 +431,7 @@ export default function ResumeEditor({
                     {/* Links */}
                     <div>
                       <label className="mb-2 block text-sm font-medium">Links</label>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {resumeData.basics.links.map((link, index) => (
                           <div key={index} className="flex gap-2">
                             <Input
@@ -434,8 +447,9 @@ export default function ResumeEditor({
                               className="flex-1"
                             />
                             <Button
-                              variant="outline"
+                              variant="ghost"
                               size="sm"
+                              className="rounded-full border border-border/60"
                               onClick={() => removeLink(index)}
                               disabled={resumeData.basics.links.length === 1}
                             >
@@ -443,7 +457,7 @@ export default function ResumeEditor({
                             </Button>
                           </div>
                         ))}
-                        <Button variant="outline" size="sm" onClick={addLink}>
+                        <Button variant="outline" size="sm" className="rounded-full border-primary/30 text-primary" onClick={addLink}>
                           <Plus className="w-4 h-4 mr-2" />
                           Add Link
                         </Button>
@@ -452,40 +466,57 @@ export default function ResumeEditor({
                   </CardContent>
                 </Card>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Professional Summary</CardTitle>
+                <Card className="overflow-hidden border border-border/80 bg-card/90 shadow-lg">
+                  <CardHeader className="relative border-b border-border/80 pb-6">
+                    <div className="absolute -inset-x-6 -top-24 h-32 bg-gradient-to-br from-accent/25 via-primary/10 to-transparent blur-3xl" />
+                    <div className="relative flex items-center justify-between">
+                      <CardTitle className="font-heading text-lg text-foreground">Professional Summary</CardTitle>
+                      <Badge variant="outline" className="rounded-full border-accent/40 text-accent">
+                        Elevator Pitch
+                      </Badge>
+                    </div>
+                    <p className="relative mt-2 text-sm text-muted-foreground">
+                      Summarize your impact in 3–4 compelling sentences highlighting scope, industry, and outcomes.
+                    </p>
                   </CardHeader>
                   <CardContent>
                     <Textarea
                       value={resumeData.summary}
                       onChange={(e) => setResumeData(prev => ({ ...prev, summary: e.target.value }))}
                       placeholder="Write a brief summary of your professional background and key achievements..."
-                      className="min-h-[100px]"
+                      className="min-h-[120px]"
                     />
                   </CardContent>
                 </Card>
               </TabsContent>
 
               <TabsContent value="experience" className="space-y-4">
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle>Work Experience</CardTitle>
-                      <Button variant="outline" size="sm" onClick={addExperience}>
+                <Card className="overflow-hidden border border-border/80 bg-card/90 shadow-lg">
+                  <CardHeader className="relative border-b border-border/80 pb-6">
+                    <div className="absolute -inset-x-6 -top-24 h-32 bg-gradient-to-br from-primary/20 via-primary/5 to-transparent blur-3xl" />
+                    <div className="relative flex items-center justify-between">
+                      <CardTitle className="font-heading text-lg text-foreground">Work Experience</CardTitle>
+                      <Button variant="outline" size="sm" className="rounded-full border-primary/30 text-primary" onClick={addExperience}>
                         <Plus className="w-4 h-4 mr-2" />
-                        Add Experience
+                        Add Role
                       </Button>
                     </div>
+                    <p className="relative mt-2 text-sm text-muted-foreground">
+                      Showcase scope, leadership, and quantifiable wins for every position you include.
+                    </p>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     {resumeData.experience.map((exp, index) => (
-                      <div key={index} className="rounded-lg border bg-white p-4">
-                        <div className="mb-4 flex items-center justify-between">
-                          <h4 className="font-medium">Experience {index + 1}</h4>
+                      <div key={index} className="rounded-2xl border border-border/80 bg-background p-5 shadow-sm">
+                        <div className="mb-4 flex items-start justify-between">
+                          <div>
+                            <h4 className="font-heading text-base font-semibold text-foreground">Experience {index + 1}</h4>
+                            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Professional impact</p>
+                          </div>
                           <Button
-                            variant="outline"
+                            variant="ghost"
                             size="sm"
+                            className="rounded-full border border-border/60"
                             onClick={() => removeExperience(index)}
                             disabled={resumeData.experience.length === 1}
                           >
@@ -512,7 +543,7 @@ export default function ResumeEditor({
                           </div>
                         </div>
                         
-                        <div className="grid grid-cols-3 gap-4 mb-4">
+                        <div className="mb-4 grid grid-cols-3 gap-4">
                           <div>
                             <label className="mb-2 block text-sm font-medium">Location</label>
                             <Input
@@ -541,7 +572,7 @@ export default function ResumeEditor({
                         
                         <div>
                           <label className="mb-2 block text-sm font-medium">Achievements & Responsibilities</label>
-                          <div className="space-y-2">
+                          <div className="space-y-3">
                             {exp.bullets.map((bullet, bulletIndex) => (
                               <div key={bulletIndex} className="flex gap-2">
                                 <Textarea
@@ -551,8 +582,9 @@ export default function ResumeEditor({
                                   className="min-h-[60px]"
                                 />
                                 <Button
-                                  variant="outline"
+                                  variant="ghost"
                                   size="sm"
+                                  className="rounded-full border border-border/60"
                                   onClick={() => removeBullet(index, bulletIndex)}
                                   disabled={exp.bullets.length === 1}
                                 >
@@ -563,6 +595,7 @@ export default function ResumeEditor({
                             <Button
                               variant="outline"
                               size="sm"
+                              className="rounded-full border-primary/30 text-primary"
                               onClick={() => addBullet(index)}
                             >
                               <Plus className="w-4 h-4 mr-2" />
@@ -577,32 +610,40 @@ export default function ResumeEditor({
               </TabsContent>
 
               <TabsContent value="education" className="space-y-4">
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle>Education</CardTitle>
-                      <Button variant="outline" size="sm" onClick={addEducation}>
+                <Card className="overflow-hidden border border-border/80 bg-card/90 shadow-lg">
+                  <CardHeader className="relative border-b border-border/80 pb-6">
+                    <div className="absolute -inset-x-6 -top-24 h-32 bg-gradient-to-br from-primary/15 via-accent/10 to-transparent blur-3xl" />
+                    <div className="relative flex items-center justify-between">
+                      <CardTitle className="font-heading text-lg text-foreground">Education</CardTitle>
+                      <Button variant="outline" size="sm" onClick={addEducation} className="rounded-full border-primary/30 text-primary">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Education
                       </Button>
                     </div>
+                    <p className="relative mt-2 text-sm text-muted-foreground">
+                      Capture degrees, bootcamps, and certifications that reinforce your current story.
+                    </p>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-5">
                     {resumeData.education.map((edu, index) => (
-                      <div key={index} className="rounded-lg border bg-white p-4">
-                        <div className="mb-4 flex items-center justify-between">
-                          <h4 className="font-medium">Education {index + 1}</h4>
+                      <div key={index} className="rounded-2xl border border-border/80 bg-background p-5 shadow-sm">
+                        <div className="mb-4 flex items-start justify-between">
+                          <div>
+                            <h4 className="font-heading text-base font-semibold text-foreground">Education {index + 1}</h4>
+                            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Academic credentials</p>
+                          </div>
                           <Button
-                            variant="outline"
+                            variant="ghost"
                             size="sm"
+                            className="rounded-full border border-border/60"
                             onClick={() => removeEducation(index)}
                             disabled={resumeData.education.length === 1}
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </div>
-                        
-                        <div className="grid grid-cols-2 gap-4 mb-4">
+
+                        <div className="mb-4 grid grid-cols-2 gap-4">
                           <div>
                             <label className="mb-2 block text-sm font-medium">School/University</label>
                             <Input
@@ -620,8 +661,8 @@ export default function ResumeEditor({
                             />
                           </div>
                         </div>
-                        
-                        <div className="grid grid-cols-2 gap-4 mb-4">
+
+                        <div className="mb-4 grid grid-cols-2 gap-4">
                           <div>
                             <label className="mb-2 block text-sm font-medium">Start Date</label>
                             <Input
@@ -639,7 +680,7 @@ export default function ResumeEditor({
                             />
                           </div>
                         </div>
-                        
+
                         <div>
                           <label className="mb-2 block text-sm font-medium">Details (Optional)</label>
                           <Input
@@ -655,11 +696,20 @@ export default function ResumeEditor({
               </TabsContent>
 
               <TabsContent value="skills" className="space-y-4">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Skills</CardTitle>
+                <Card className="overflow-hidden border border-border/80 bg-card/90 shadow-lg">
+                  <CardHeader className="relative border-b border-border/80 pb-6">
+                    <div className="absolute -inset-x-6 -top-24 h-32 bg-gradient-to-br from-accent/20 via-primary/10 to-transparent blur-3xl" />
+                    <div className="relative flex items-center justify-between">
+                      <CardTitle className="font-heading text-lg text-foreground">Skills</CardTitle>
+                      <Badge variant="outline" className="rounded-full border-accent/40 text-accent">
+                        Keywords
+                      </Badge>
+                    </div>
+                    <p className="relative mt-2 text-sm text-muted-foreground">
+                      Separate each skill with a comma—we'll format them into a clean list within the template.
+                    </p>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="space-y-4">
                     <div>
                       <label className="mb-2 block text-sm font-medium">Technical Skills</label>
                       <Textarea
@@ -668,14 +718,14 @@ export default function ResumeEditor({
                         placeholder="React, TypeScript, Node.js, Python, AWS..."
                         className="min-h-[100px]"
                       />
-                      <p className="mt-2 text-sm text-slate-500">
+                      <p className="mt-2 text-sm text-muted-foreground">
                         Enter skills separated by commas
                       </p>
                     </div>
                     
                     {resumeData.skills.length > 0 && (
                       <div className="mt-4">
-                        <p className="mb-2 text-sm font-medium">Preview:</p>
+                        <p className="mb-2 text-sm font-medium text-muted-foreground">Preview:</p>
                         <div className="flex flex-wrap gap-2">
                           {resumeData.skills.map((skill, index) => (
                             <Badge key={index} variant="secondary">
@@ -693,13 +743,25 @@ export default function ResumeEditor({
 
           {/* Right: Live Preview */}
           <div className="lg:sticky lg:top-4">
-            <div className="rounded-lg bg-white p-4 shadow-sm">
+            <div className="w-full rounded-2xl border border-border/70 bg-card/90 p-6 shadow-xl backdrop-blur lg:min-w-[840px] lg:max-w-[840px]">
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="font-semibold">Live Preview</h3>
+                <h3 className="font-heading text-lg font-semibold text-foreground">Live Preview</h3>
                 <Badge variant="outline">{template.name}</Badge>
               </div>
-              <div className="overflow-auto" ref={resumeContainerRef}>
-                <TemplateRenderer template={template} data={resumeData} />
+              <div className="max-h-[calc(100vh-220px)] overflow-auto rounded-2xl bg-slate-100/80 p-4">
+                <div className="flex justify-center">
+                  <div
+                    ref={resumeContainerRef}
+                    className="inline-block bg-white"
+                    style={{ width: previewWidth }}
+                  >
+                    <TemplateRenderer 
+                      template={template} 
+                      data={resumeData} 
+                      className="!rounded-none !border-none !shadow-none"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

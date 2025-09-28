@@ -54,7 +54,6 @@ const ResumeBuilder = () => {
           onExport={handleExport}
         />
       </main>
-      <Footer />
     </div>
   );
 };

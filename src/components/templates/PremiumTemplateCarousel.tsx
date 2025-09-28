@@ -1,7 +1,4 @@
 import React, { useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -29,8 +26,8 @@ interface PremiumTemplateCarouselProps {
 
 const PremiumTemplateCarousel = ({ 
   templates, 
-  title = "Choose Your Perfect Template",
-  subtitle = "Professional resume templates designed to get you hired"
+  title,
+  subtitle
 }: PremiumTemplateCarouselProps) => {
   const navigate = useNavigate();
 
@@ -42,10 +39,6 @@ const PremiumTemplateCarousel = ({
     image: getTemplateImage(template.category, template.id)
   }));
 
-  // Debug: Log templates
-  console.log('Display templates:', displayTemplates);
-  console.log('Templates from registry:', templateRegistry.getAllTemplates());
-
   const handleTemplateClick = useCallback((templateId: string) => {
     navigate(`/resume/${templateId}`);
   }, [navigate]);
@@ -55,25 +48,25 @@ const PremiumTemplateCarousel = ({
   }
 
   return (
-    <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {subtitle}
-          </p>
-        </div>
-
-        {/* Debug Info */}
-        <div className="text-center mb-4 text-sm text-gray-600">
-          Debug: Found {displayTemplates.length} templates
-        </div>
+    <section className="py-20 bg-gradient-to-br from-background via-primary/15 to-background">
+      <div className="container mx-auto px-6">
+        {(title || subtitle) && (
+          <div className="mb-14 text-center">
+            {title && (
+              <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+                {title}
+              </h2>
+            )}
+            {subtitle && (
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+                {subtitle}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* Carousel */}
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative mx-auto max-w-6xl">
           <Carousel
             opts={{
               align: "start",
@@ -91,18 +84,18 @@ const PremiumTemplateCarousel = ({
                      {/* Simplified gradient border structure */}
                      <div className="relative">
                        {/* Gradient border background */}
-                       <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl"></div>
+                       <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-primary/20 via-accent/20 to-primary/10"></div>
                        {/* Content with gradient background and margin for border */}
-                       <div className="relative m-[2px] bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.02]">
+                       <div className="relative m-[2px] rounded-2xl bg-gradient-to-br from-card via-primary/15 to-accent/10 backdrop-blur-sm shadow-lg transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl">
                          <div className="p-4">
-                           <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200/50">
+                           <div className="aspect-[3/4] overflow-hidden rounded-xl border border-border bg-muted">
                              <img 
                                src={template.image}
                                alt={`${template.name} template`}
                                className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
                              />
                            </div>
-                           <div className="mt-2 text-center text-sm font-medium text-gray-800">
+                           <div className="mt-3 text-center text-sm font-medium text-foreground">
                              {template.name}
                            </div>
                          </div>

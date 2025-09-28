@@ -1,5 +1,4 @@
 import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import CategoryTemplatesView from "@/components/templates/CategoryTemplatesView";
 
 const Templates = () => {
@@ -9,7 +8,6 @@ const Templates = () => {
       <main>
         <CategoryTemplatesView />
       </main>
-      <Footer />
     </div>
   );
 };
