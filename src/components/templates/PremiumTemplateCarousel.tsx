@@ -92,8 +92,8 @@ const PremiumTemplateCarousel = ({
                      <div className="relative">
                        {/* Gradient border background */}
                        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl"></div>
-                       {/* Content with white background and margin for border */}
-                       <div className="relative m-[2px] bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.02]">
+                       {/* Content with gradient background and margin for border */}
+                       <div className="relative m-[2px] bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.02]">
                          <div className="p-4">
                            <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200/50">
                              <img 
