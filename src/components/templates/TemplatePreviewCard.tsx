@@ -98,21 +98,33 @@ const TemplatePreviewCard = ({
       {/* Template Preview Container */}
       <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-background to-muted/20">
         {templateSchema && sampleData ? (
-          <div className="w-full h-full flex items-center justify-center p-2">
+          <div className="w-full h-full flex items-start justify-center p-1">
             <div 
-              className="bg-white shadow-lg border transform origin-center rounded-lg overflow-hidden"
+              className="bg-white shadow-sm border transform origin-top rounded-md overflow-hidden"
               style={{
-                width: '90%',
-                height: '95%',
-                transform: 'scale(0.85)',
+                width: '100%',
+                height: '100%',
+                transform: 'scale(0.95)',
+                fontSize: '6px',
+                lineHeight: '1.2',
               }}
             >
               <div className="w-full h-full overflow-hidden relative">
-                <TemplateRenderer 
-                  template={templateSchema} 
-                  data={sampleData}
-                  className="border-0 shadow-none rounded-none h-full overflow-hidden text-xs"
-                />
+                <div style={{ 
+                  transform: 'scale(0.35)', 
+                  transformOrigin: 'top left',
+                  width: '285%',
+                  height: '285%'
+                }}>
+                  <TemplateRenderer 
+                    template={{
+                      ...templateSchema,
+                      page: { ...templateSchema.page, margins: 12 }
+                    }} 
+                    data={sampleData}
+                    className="border-0 shadow-none rounded-none overflow-hidden"
+                  />
+                </div>
               </div>
             </div>
           </div>
