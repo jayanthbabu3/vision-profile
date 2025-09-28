@@ -47,85 +47,56 @@ const PremiumTemplateCarousel = ({
   }, [navigate]);
 
   function getTemplateImage(category: string, id: string) {
-    const categoryLower = category.toLowerCase();
-    if (categoryLower === 'classic' || id.includes('classic')) {
-      return "/assets/template-classic.jpg";
-    } else if (categoryLower === 'modern' || id.includes('modern')) {
-      return "/assets/template-modern.jpg";
-    } else if (categoryLower === 'creative' || id.includes('creative')) {
-      return "/assets/template-creative.jpg";
-    } else {
-      return "/assets/resume-template.png";
-    }
+    return "/assets/resume-template.png";
   }
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {title}
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             {subtitle}
           </p>
         </div>
 
         {/* Carousel */}
-        <div className="relative">
+        <div className="relative max-w-7xl mx-auto">
           <Carousel
             opts={{
-              align: "start",
+              align: "center",
               loop: true,
             }}
             className="w-full"
           >
-            <CarouselContent className="-ml-6">
+            <CarouselContent className="-ml-4">
               {displayTemplates.map((template) => (
-                <CarouselItem key={template.id} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                  <Card 
-                    className="group cursor-pointer overflow-hidden bg-card border border-border shadow-lg hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2"
+                <CarouselItem key={template.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                  <div 
+                    className="cursor-pointer group"
                     onClick={() => handleTemplateClick(template.id)}
                   >
-                    <div className="relative aspect-[3/4] overflow-hidden">
-                      <img 
-                        src={template.image}
-                        alt={`${template.name} template`}
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      
-                      {/* Template Name Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 className="text-xl font-semibold text-white drop-shadow-lg">
-                          {template.name}
-                        </h3>
-                        <p className="text-sm text-white/80 drop-shadow-md">
-                          {template.category}
-                        </p>
+                    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                      <div className="aspect-[3/4] overflow-hidden bg-gray-50">
+                        <img 
+                          src={template.image}
+                          alt={`${template.name} template`}
+                          className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
                     </div>
-                  </Card>
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
             
             {/* Navigation Arrows */}
-            <CarouselPrevious className="absolute -left-6 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border-2 border-border hover:bg-accent hover:border-accent-foreground shadow-lg" />
-            <CarouselNext className="absolute -right-6 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border-2 border-border hover:bg-accent hover:border-accent-foreground shadow-lg" />
+            <CarouselPrevious className="absolute -left-12 top-1/2 -translate-y-1/2 h-10 w-10 bg-white border border-gray-300 hover:bg-gray-50 shadow-lg rounded-full" />
+            <CarouselNext className="absolute -right-12 top-1/2 -translate-y-1/2 h-10 w-10 bg-white border border-gray-300 hover:bg-gray-50 shadow-lg rounded-full" />
           </Carousel>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-16">
-          <Button 
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-            onClick={() => navigate('/templates')}
-          >
-            View All Templates
-          </Button>
         </div>
       </div>
     </section>

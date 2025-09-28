@@ -27,16 +27,7 @@ const CategoryTemplatesView = () => {
   }, []);
 
   function getTemplateImage(category: string, id: string) {
-    const categoryLower = category.toLowerCase();
-    if (categoryLower === 'classic' || id.includes('classic')) {
-      return "/assets/template-classic.jpg";
-    } else if (categoryLower === 'modern' || id.includes('modern')) {
-      return "/assets/template-modern.jpg";
-    } else if (categoryLower === 'creative' || id.includes('creative')) {
-      return "/assets/template-creative.jpg";
-    } else {
-      return "/assets/resume-template.png";
-    }
+    return "/assets/resume-template.png";
   }
 
   // Get unique categories
