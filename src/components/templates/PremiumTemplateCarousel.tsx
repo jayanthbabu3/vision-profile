@@ -10,6 +10,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useNavigate } from "react-router-dom";
+import { templateRegistry } from "@/lib/template-registry";
+// Import to ensure templates are registered
+import "@/lib/template-schemas";
 
 interface Template {
   id: string;
@@ -19,7 +22,7 @@ interface Template {
 }
 
 interface PremiumTemplateCarouselProps {
-  templates: Template[];
+  templates?: Template[];
   title?: string;
   subtitle?: string;
 }
@@ -31,21 +34,30 @@ const PremiumTemplateCarousel = ({
 }: PremiumTemplateCarouselProps) => {
   const navigate = useNavigate();
 
+  // Get templates from registry if not provided
+  const displayTemplates = templates || templateRegistry.getAllTemplates().map(template => ({
+    id: template.id,
+    name: template.name,
+    category: template.category,
+    image: getTemplateImage(template.category, template.id)
+  }));
+
   const handleTemplateClick = useCallback((templateId: string) => {
     navigate(`/resume/${templateId}`);
   }, [navigate]);
 
-  const getTemplateImage = (template: Template) => {
-    if (template.id === 'classic' || template.category.toLowerCase() === 'classic') {
+  function getTemplateImage(category: string, id: string) {
+    const categoryLower = category.toLowerCase();
+    if (categoryLower === 'classic' || id.includes('classic')) {
       return "/assets/template-classic.jpg";
-    } else if (template.id === 'modern' || template.category.toLowerCase() === 'modern') {
+    } else if (categoryLower === 'modern' || id.includes('modern')) {
       return "/assets/template-modern.jpg";
-    } else if (template.id === 'creative' || template.category.toLowerCase() === 'creative') {
+    } else if (categoryLower === 'creative' || id.includes('creative')) {
       return "/assets/template-creative.jpg";
     } else {
       return "/assets/resume-template.png";
     }
-  };
+  }
 
   return (
     <section className="py-24 bg-background">
@@ -70,7 +82,7 @@ const PremiumTemplateCarousel = ({
             className="w-full"
           >
             <CarouselContent className="-ml-6">
-              {templates.map((template) => (
+              {displayTemplates.map((template) => (
                 <CarouselItem key={template.id} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                   <Card 
                     className="group cursor-pointer overflow-hidden bg-card border border-border shadow-lg hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2"
@@ -78,7 +90,7 @@ const PremiumTemplateCarousel = ({
                   >
                     <div className="relative aspect-[3/4] overflow-hidden">
                       <img 
-                        src={getTemplateImage(template)}
+                        src={template.image}
                         alt={`${template.name} template`}
                         className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />

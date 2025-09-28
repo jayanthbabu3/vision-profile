@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import PremiumTemplateCarousel from "./PremiumTemplateCarousel";
 import { templateRegistry } from "@/lib/template-registry";
+// Import to ensure templates are registered
+import "@/lib/template-schemas";
 
 interface Template {
   id: string;
@@ -20,9 +22,22 @@ const CategoryTemplatesView = () => {
       id: template.id,
       name: template.name,
       category: template.category,
-      image: `/assets/template-${template.id}.jpg`
+      image: getTemplateImage(template.category, template.id)
     }));
   }, []);
+
+  function getTemplateImage(category: string, id: string) {
+    const categoryLower = category.toLowerCase();
+    if (categoryLower === 'classic' || id.includes('classic')) {
+      return "/assets/template-classic.jpg";
+    } else if (categoryLower === 'modern' || id.includes('modern')) {
+      return "/assets/template-modern.jpg";
+    } else if (categoryLower === 'creative' || id.includes('creative')) {
+      return "/assets/template-creative.jpg";
+    } else {
+      return "/assets/resume-template.png";
+    }
+  }
 
   // Get unique categories
   const categories = useMemo(() => {
