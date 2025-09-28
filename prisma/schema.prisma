@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Template {
+  id          String            @id @default(cuid())
+  name        String
+  description String?
+  category    String
+  tags        String[]
+  isPremium   Boolean           @default(false)
+  previewUrl  String?
+  templateUrl String?
+  isActive    Boolean           @default(true)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  // New fields for schema-driven templates
+  templateSchema Json?           // The JSON schema for rendering
+  sampleData    Json?           // Sample data for preview
+  sections      TemplateSection[]
+  usage         TemplateUsage[]
+  resumes       Resume[]        // Resumes created with this template
+
+  @@map("templates")
+}
+
+model TemplateSection {
+  id         String   @id @default(cuid())
+  templateId String
+  name       String
+  order      Int
+  isRequired Boolean  @default(false)
+  config     Json?
+  template   Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@map("template_sections")
+}
+
+model TemplateUsage {
+  id         String   @id @default(cuid())
+  templateId String
+  userId     String?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  template   Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@map("template_usage")
+}
+
+model Resume {
+  id          String   @id @default(cuid())
+  templateId  String
+  userId      String?  // Will be used when auth is added
+  title       String?  // Resume title/name
+  resumeData  Json     // The actual resume content
+  isPublic    Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  template    Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@map("resumes")
+}

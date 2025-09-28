@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { PenTool, User, Menu } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -10,19 +11,19 @@ const Header = () => {
       <div className="max-w-container mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
               <PenTool className="w-4 h-4 text-white" />
             </div>
             <span className="font-heading font-bold text-xl">ResumeAI</span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation & Actions */}
           <div className="hidden md:flex items-center gap-8">
             <nav className="flex items-center gap-8">
-              <a href="/templates" className="btn-ghost">
+              <Link to="/templates" className="btn-ghost">
                 Templates
-              </a>
+              </Link>
               <a href="/super-resumes" className="btn-ghost">
                 Examples
               </a>
@@ -50,9 +51,9 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-border">
             <nav className="flex flex-col gap-4">
-              <a href="/templates" className="btn-ghost text-left justify-start">
+              <Link to="/templates" className="btn-ghost text-left justify-start">
                 Templates
-              </a>
+              </Link>
               <a href="/super-resumes" className="btn-ghost text-left justify-start">
                 Examples
               </a>
