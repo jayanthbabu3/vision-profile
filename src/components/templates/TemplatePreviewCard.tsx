@@ -96,20 +96,73 @@ const TemplatePreviewCard = ({
       </div>
 
       {/* Template Preview Container */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-muted/30 to-muted/60">
+      <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-background to-muted/20">
         {templateSchema && sampleData ? (
-          <div className="w-full h-full p-4 flex items-center justify-center">
-            <div className="transform scale-[0.25] origin-top-left w-[400%] h-[400%] bg-white rounded-lg shadow-xl border overflow-hidden">
-              <TemplateRenderer 
-                template={templateSchema} 
-                data={sampleData}
-                className="border-0 shadow-none rounded-none"
-              />
+          <div className="w-full h-full flex items-center justify-center p-2">
+            <div 
+              className="bg-white shadow-lg border transform origin-center rounded-lg overflow-hidden"
+              style={{
+                width: '90%',
+                height: '95%',
+                transform: 'scale(0.85)',
+              }}
+            >
+              <div className="w-full h-full overflow-hidden relative">
+                <TemplateRenderer 
+                  template={templateSchema} 
+                  data={sampleData}
+                  className="border-0 shadow-none rounded-none h-full overflow-hidden text-xs"
+                />
+              </div>
             </div>
           </div>
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="text-center">
+          // Fallback to image based on template ID/category
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted/10 to-muted/30">
+            {/* Try to show template image based on ID or use category placeholder */}
+            {id === 'classic' || category.toLowerCase() === 'classic' ? (
+              <img 
+                src="/assets/template-classic.jpg" 
+                alt={`${name} template preview`}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+            ) : id === 'modern' || category.toLowerCase() === 'modern' ? (
+              <img 
+                src="/assets/template-modern.jpg" 
+                alt={`${name} template preview`}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+            ) : id === 'creative' || category.toLowerCase() === 'creative' ? (
+              <img 
+                src="/assets/template-creative.jpg" 
+                alt={`${name} template preview`}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+            ) : (
+              <img 
+                src="/assets/resume-template.png" 
+                alt={`${name} template preview`}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+            )}
+            {/* Fallback icon if image fails */}
+            <div className="hidden text-center">
               <div className={`w-20 h-20 bg-gradient-to-br ${getCategoryGradient(category)} rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg`}>
                 <Tag className="w-10 h-10 text-white" />
               </div>
