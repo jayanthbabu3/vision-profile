@@ -98,28 +98,30 @@ const TemplatePreviewCard = ({
       {/* Template Preview Container */}
       <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-background to-muted/20">
         {templateSchema && sampleData ? (
-          <div className="w-full h-full flex items-start justify-center p-1">
+          <div className="w-full h-full flex items-center justify-center p-2">
             <div 
-              className="bg-white shadow-sm border transform origin-top rounded-md overflow-hidden"
+              className="bg-white shadow-sm border rounded-sm overflow-hidden relative"
               style={{
-                width: '100%',
-                height: '100%',
-                transform: 'scale(0.95)',
-                fontSize: '6px',
-                lineHeight: '1.2',
+                width: '90%',
+                height: '95%',
               }}
             >
-              <div className="w-full h-full overflow-hidden relative">
+              <div className="w-full h-full overflow-hidden relative flex items-center justify-center">
                 <div style={{ 
-                  transform: 'scale(0.35)', 
-                  transformOrigin: 'top left',
-                  width: '285%',
-                  height: '285%'
+                  transform: 'scale(0.28)', 
+                  transformOrigin: 'center center',
+                  width: '357%',
+                  height: '357%',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  marginLeft: '-178.5%',
+                  marginTop: '-178.5%'
                 }}>
                   <TemplateRenderer 
                     template={{
                       ...templateSchema,
-                      page: { ...templateSchema.page, margins: 12 }
+                      page: { ...templateSchema.page, margins: 8 }
                     }} 
                     data={sampleData}
                     className="border-0 shadow-none rounded-none overflow-hidden"
