@@ -79,14 +79,19 @@ const PremiumTemplateCarousel = ({
                     className="cursor-pointer group"
                     onClick={() => handleTemplateClick(template.id)}
                   >
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/60 group-hover:scale-[1.02]">
-                      <div className="p-4">
-                        <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200/50">
-                          <img 
-                            src={template.image}
-                            alt={`${template.name} template`}
-                            className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                          />
+                    <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:scale-[1.02]">
+                      {/* Gradient Border */}
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-[2px]">
+                        <div className="bg-white/90 backdrop-blur-sm rounded-2xl h-full w-full">
+                          <div className="p-4">
+                            <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200/50">
+                              <img 
+                                src={template.image}
+                                alt={`${template.name} template`}
+                                className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                              />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
